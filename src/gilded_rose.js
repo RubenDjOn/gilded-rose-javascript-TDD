@@ -4,6 +4,9 @@ function Item(name, sell_in, quality) {
   this.quality = quality;
 }
 
+var MIN_QUALITY = 0;
+var MAX_QUALITY = 50;
+
 var items = [];
 
 function initItems(){
@@ -21,8 +24,8 @@ function updateQuality(itemName){
   items.forEach(function(item){
     if (itemChanges(item)) {
       item.quality = increaseQuality(item.name) ? qualityToIncrease(item) : qualityToDecrease(item);
-      item.quality = qualityLessThan0(item.quality) ? 0 : item.quality;
-      item.quality = qualityMoreThan50(item.quality) ? 50 : item.quality;  
+      item.quality = qualityLessThan0(item.quality) ? MIN_QUALITY : item.quality;
+      item.quality = qualityMoreThan50(item.quality) ? MAX_QUALITY : item.quality;  
       
       item.sell_in -= 1;
     }
@@ -34,11 +37,11 @@ function itemChanges(item){
 }
 
 function qualityLessThan0(itemQuality){
-  return itemQuality < 0;
+  return itemQuality < MIN_QUALITY;
 }
 
 function qualityMoreThan50(itemQuality){
-  return itemQuality > 50;
+  return itemQuality > MAX_QUALITY;
 }
 
 function increaseQuality(itemName){

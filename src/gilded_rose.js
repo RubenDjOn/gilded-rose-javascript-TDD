@@ -22,7 +22,7 @@ function initItems(){
 
 function updateQuality(itemName){
   items.forEach(function(item){
-    if (itemChanges(item)) {
+    if (canItemChange(item)) {
       item.quality = increaseQuality(item.name) ? qualityToIncrease(item) : qualityToDecrease(item);
       item.quality = qualityLessThan0(item.quality) ? MIN_QUALITY : item.quality;
       item.quality = qualityMoreThan50(item.quality) ? MAX_QUALITY : item.quality;  
@@ -32,7 +32,7 @@ function updateQuality(itemName){
   });
 }
 
-function itemChanges(item){
+function canItemChange(item){
   return (item.name!='Sulfuras, Hand of Ragnaros');
 }
 
